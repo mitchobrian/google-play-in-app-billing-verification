@@ -21,48 +21,18 @@ class GooglePlayResponseData
 	/**
 	 * @var array
 	 */
-    protected $_orders;
-
-    /**
-     * @var integer
-     */
-    protected $_nonce;
+    protected $_order;
 
     /**
      * @param string $responseData
      */
     public function  __construct($responseData)
     {
-        if (!is_string($responseData)) {
+         if (!is_string($responseData)) {
             throw new GooglePlayInvalidArgumentException("Invalid response data, expected string");
-        }
-	
-        $jsonResponse = json_decode($responseData);
-        
-        if(empty($jsonResponse->nonce))
-        	throw new GooglePlayInvalidArgumentException("No nonce");
-         
-        $this->_nonce = $jsonResponse->nonce;
-        
-        if(empty($jsonResponse->orders))
-        	throw new GooglePlayInvalidArgumentException("No orders");
-        
-        $_orders = array();
-        
-        foreach($jsonResponse->orders as $order) {
-        	$gpOrder = new GooglePlayOrder($order);
-        	array_push($_orders, $gpOrder);
-        }
-    }
+         }
 
-    /**
-     * Get one-time nonce
-     * 
-     * @return string
-     */
-    public function getNonce()
-    {
-        return $this->_nonce;
+         $this->_order = new GooglePlayOrder(json_decode($responseData));
     }
 
     /**
@@ -70,8 +40,8 @@ class GooglePlayResponseData
      *
      * @return string
      */
-    public function getOrders()
+    public function getOrder()
     {
-        return $this->_orders;
+        return $this->_order;
     }
 }

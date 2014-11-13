@@ -20,7 +20,7 @@ class GooglePlayOrder
 	/**
 	 * @var string
 	 */
-	protected $_notificationId;
+	protected $_purchaseToken;
 
 	/**
 	 * @var string
@@ -49,16 +49,21 @@ class GooglePlayOrder
 	protected $_purchaseState;
 
 	/**
+	 * @var developerPayload
+	 */
+	protected $_developerPayload;
+
+	/**
 	 * @param Object $order
 	 */
 	public function  __construct($order)
 	{
 		$vars = get_object_vars($order);
 		
-		if(!isset($vars["notificationId"]))
-			throw new GooglePlayInvalidArgumentException("No notificationId");
+		if(!isset($vars["purchaseToken"]))
+			throw new GooglePlayInvalidArgumentException("No purchaseToken");
 
-		$this->_notificationId = $vars["notificationId"];
+		$this->_purchaseToken = $vars["purchaseToken"];
 
 		if(!isset($vars["orderId"]))
 			throw new GooglePlayInvalidArgumentException("No orderId");
@@ -84,6 +89,12 @@ class GooglePlayOrder
 			throw new GooglePlayInvalidArgumentException("No purchaseState");
 
 		$this->_purchaseState = $vars["purchaseState"];
+
+		if(!isset($vars["developerPayload"]))
+			throw new GooglePlayInvalidArgumentException("No developerPayload");
+
+		$this->_developerPayload = $vars["developerPayload"];
+
 	}
 
 	/**
@@ -91,9 +102,9 @@ class GooglePlayOrder
 	 *
 	 * @return string
 	 */
-	public function getNotificationId()
+	public function getpurchaseToken()
 	{
-		return $this->_notificationId;
+		return $this->_purchaseToken;
 	}
 
 	/**
@@ -144,6 +155,16 @@ class GooglePlayOrder
 	public function getPurchaseState()
 	{
 		return $this->_purchaseState;
+	}
+
+	/**
+	 * Get the purchase state
+	 *
+	 * @return string
+	 */
+	public function getDeveloperPayload()
+	{
+		return $this->_developerPayload;
 	}
 
 }

@@ -47,7 +47,7 @@ class GooglePlayResponseValidator  {
         $key = openssl_get_publickey($key);
         if (false === $key) {
             throw new GooglePlayInvalidArgumentException(
-                    'Please pass a Base64-encoded public key from the Market portal');
+                    'Please pass a Base64-encoded public key from SERVICES & APIS');
         }
         $this->_publicKey   = $key;
         $this->_packageName = $packageName;
@@ -70,12 +70,19 @@ class GooglePlayResponseValidator  {
         }
 
         //check package name is valid
-        if (!empty($packageName) && $packageName !== $response->getPackageName()) {
+        if (!empty($this->_packageName) && $this->_packageName !== $response->getOrder()->getPackageName()) {
             return false;
         }
 
-        $result = openssl_verify($responseData, base64_decode($signature),
+        $result = openssl_verify($responseData, $signature,
                                  $this->_publicKey, self::SIGNATURE_ALGORITHM);
+
+         /*
+         var_dump($responseData);
+         var_dump($signature);
+         var_dump($this->_publicKey);
+         var_dump($result);
+         */
 
         //openssl_verify returns 1 for a valid signature
         if (0 === $result) {
