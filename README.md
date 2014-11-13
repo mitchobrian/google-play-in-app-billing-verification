@@ -14,7 +14,7 @@ The only requirements for this library are PHP compiled with OpenSSL support, an
 
 ## Test UI
 
-There is simple small test UI for public usage. Have look:
+There is simple small test UI for public usage.
 
 http://www.palmomedia.de/google-play-in-app-billing-verification/samples/
 
