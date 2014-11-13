@@ -1,4 +1,4 @@
-## Google Play In App Billing Verification 
+## PHP Google Play In App Billing Verification 
 ## for Google API Version 3
 
 A simple PHP library for verifying responses from the Google Play In-App billing service. By verifying responses signed using public-key cryptography you can check whether a user has genuinely purchased your application.
@@ -15,7 +15,28 @@ Original repo:
 
 http://code.google.com/p/android-market-license-verification/
 
-*Please note that this code isn't working for unknown reasons. The given response data for the openssl_verify verification should be correct as taken from the API description.*
+
+---
+
+
+## Important Information 
+
+*The given response data from the google in app billing API should not be manipulated in any case. The order of the structured JSON is important for the ssl verification with the given signature.*
+```
+{ 
+   "orderId":"12999763169054705758.1371079406387615", 
+   "packageName":"com.example.app",
+   "productId":"exampleSku",
+   "purchaseTime":1345678900000,
+   "purchaseState":0,
+   "developerPayload":"bGoa+V7g/yqDXvKRqq+JTFn4uQZbPiQJo4pf9RzJ",
+   "purchaseToken":"rojeslcdyyiapnqcynkjyyjh"
+ }
+```
+
+
+---
+
 
 For further information look at:
 
