@@ -74,7 +74,7 @@ class GooglePlayResponseValidator  {
             return false;
         }
 
-        $result = openssl_verify($responseData, $signature,
+        $result = openssl_verify($responseData, base64_decode($signature),
                                  $this->_publicKey, self::SIGNATURE_ALGORITHM);
 
          /*
