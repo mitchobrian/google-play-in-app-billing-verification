@@ -41,7 +41,7 @@ $signature = '';
 //$response = new AndroidMarket_Licensing_ResponseData($responseData);
 //$valid = $validator->verify($response, $signature);
 
-$validator = new AndroidMarket_Licensing_ResponseValidator(PUBLIC_KEY, PACKAGE_NAME);
+$validator = new GooglePlayResponseValidator(PUBLIC_KEY, PACKAGE_NAME);
 $valid = $validator->verify($responseData, $signature);
 
 var_dump($valid);
